@@ -1,4 +1,4 @@
-# No oscillators (bytebeat inspired) tutorial
+# No oscillators (bytebeat inspired) quick guide
 
 Do you know *bytebeat?* If not, you should. It's a very cheap and minimalistic way of coding music in a simple way, working only with a function of time. The results of the formula go directly to the analog conversor, ussualy is writen in 8-bit, reading each ascii character (0-255) as a sample, an speaker possition. Check it out, there are many documentations and software (you can do it even from the console with python commands).
 
