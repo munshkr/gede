@@ -1,12 +1,16 @@
 # No oscillators (bytebeat inspired) quick guide
 
-Do you know *bytebeat?* If not, you should. It's a very cheap and minimalistic way of coding music in a simple way, working only with a function of time. The results of the formula go directly to the analog conversor, ussualy is writen in 8-bit, reading each ascii character (0-255) as a sample, an speaker possition. Check it out, there are many documentations and software (you can do it even from the console with python commands).
+Do you know *bytebeat?* If not, you should. It's a very cheap and minimalistic way of coding music in a simple way, working only with a function of time. The results of the formula go directly to the analog conversor, ussualy is writen in 8-bit, reading each ascii character (0-255) as a sample, a speaker possition. Check it out, there are many documentations and software (you can do it even from the console with python commands).
 
 Well, since I do livecoding and I like to mess with synthesis, much general aspects of this technique are very helpfull and I did an example video with *Pure Data*, check https://youtu.be/eVdi0i-4WLk.  Here I'll explain the basics more or less in the same order of appearence than in the vid.
+
+###### The very basic concept is dividing the counting in small values so the cycle is audible as a pitch or dividing it in big values to get rythms (amplitude envelopes, modulations, ...). So MODULUS (%) is your best friend.
 
 ## Time ramp
 
 First you should make the time ramp (the only input that is required). I do it with *phasor~*. In the vid I count to 64000 in 0.125 Hz. These values give you the speed and pitch of the loop. Although it is easier to work with small numbers, you should keep in mind that the greater the number is, the higher is the quality and pitches you can generate.
+
+###### In this specific ramp setup (64000 at 0.125Hz) you'll have *audible pitches from about %250, anything higher sounds more rythmic: %1000 seems an acceptable quaver/semiquaver unit*.
 
 ## Boolean pop
 
@@ -20,7 +24,7 @@ you will hear a pop for every "pattern", since it returns 1 each time the modulu
 
 The pop is a very rare square wave 'cause it has alsmost no pulse width. It is something like 10000000000000000000000000000100. But in order to hear something like a pitch you should make the cycle shorter and the width more symetrical. Something like 111000111. You do it with smaller numbers and conditionals:
 
-###### $v1%100 < 50
+###### $v1%200 < 100
 
 This would make a perfect symetrical square wave at a low pitch in our 64000 in 0.125Hz loop (half of the times it is 1, and half 0). 
 
@@ -28,7 +32,7 @@ This would make a perfect symetrical square wave at a low pitch in our 64000 in 
 
 In the video you'll notice that I ussually use the *(wave) * (envelope) * amplitude* formula.  You can give it some rythm by using modulus in subdivisions of the counter. 8000 would be like a pattern, 4000 could be the floor beat (commonly the kick drum), etc. So if you use:
 
-###### ( $v1%100<50 ) * ( $v1%8000 < 4000 )
+###### ( $v1%200 < 100 ) * ( $v1%8000 < 4000 )
 
 the amplitude of the square bass we made will be 1 the first half of the pattern and 0 the other half. But say you want it to sound at the beginning of the pattern but with a shorter duration. Ok, you just decrease the condition like $v1%8000<1000. There are lots of crazy combinations you can do, like $v1%16000%3000 (it will go off beat but always to the floor each 2 patterns).
 
@@ -38,15 +42,17 @@ And by adding a final multiplication you can controll the amplitude (normally fr
 
 In the example above, the width of the square is fixed in the half but you can modulate it to get a richer harmonic result. Check this:
 
-###### $v1%100 < ( $v1/100 * 100 )
+###### $v1%200 < ( $v1/100 * 200 )
 
 Now the condition changes over the time, making the width longer.  Try different divisors and proportions like 
 
-###### $v1%100 < ( $v1/50 * 40 + 40 )
+###### $v1%200 < ( $v1/50 * 50 + 100 )
 
-## Bytecode saw wave
+## Bytecode saw waves
 
-Your input is an increasing number, so it is already a saw wave. *But carefull with the amplitude!* $v1%1000 should be normalized * 0.01 or less if you don't want to blow your speakers with a 1000 amplitude killer saw. It would be a great idea to put a *clip~ -1 1* before the *dac~.
+Your input is an increasing number, so it is already a saw wave. You can play with modulus and get different pitches ***but carefull with the amplitude! Must divide the amplitude by the modulus or less (twice I recommend) if you don't want to blow your speakers with a  killer bytebeat saw of 99999 amplitude when 0-1 is the normal.*** It would be a great idea to put a *clip~ -1 1* before the *dac~.
+
+### ( $v1%100 ) / 500   This is nice.
 
 ## Sines!!!
 
