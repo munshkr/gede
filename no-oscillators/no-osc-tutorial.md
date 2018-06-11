@@ -52,9 +52,9 @@ Your input is an increasing number, so it is already a saw wave. *But carefull w
 
 sin($v1) makes a sine wave and you can change the pitch by multiplying (* 0.5, one octave lower, * 2 higher, etc). But what's juicy of sines is that you can use them to operate anything very fluidly, like LFOs and get some AM, FM or whatever:
 
-###### ( $v1%1000 == 0 ) * sin( $v1 * 0.001 )                         The pop sound with some amplitude 
+###### ( $v1%1000 == 0 ) * sin( $v1 * 0.001 )                         The pop sound with some amplitude modulation (AM)
 
-###### sin( $v1 * 0.2 + sin ($v1 * 0.6) )                             Two operator FM (1:3)
+###### sin( $v1 * 0.2 + sin ($v1 * 0.6) )                             Two operator frequecny modulation (FM) (1:3 ratio)
 
 ###### sin( $v1 * 0.2 + sin ($v1 * 0.6) * (sin ($v1 * 0.0001) * 20)   The same but plus one more operator index modulator
 
