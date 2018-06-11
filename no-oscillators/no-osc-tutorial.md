@@ -2,7 +2,7 @@
 
 Do you know *bytebeat?* If not, you should. It's a very cheap and minimalistic way of coding music in a simple way, working only with a function of time. The results of the formula go directly to the analog conversor, ussualy is writen in 8-bit, reading each ascii character (0-255) as a sample, an speaker possition. Check it out, there are many documentations and software (you can do it even from the console with python commands).
 
-Well, since I do livecoding and I like to mess with synthesis, much general aspects of this technique are very helpfull and I did an example video with *Pure Data*: https://youtu.be/eVdi0i-4WLk.  Here I'll explain the basics more or less in the same order of appearence than in the vid.
+Well, since I do livecoding and I like to mess with synthesis, much general aspects of this technique are very helpfull and I did an example video with *Pure Data*, check https://youtu.be/eVdi0i-4WLk.  Here I'll explain the basics more or less in the same order of appearence than in the vid.
 
 ## Time ramp
 
@@ -14,7 +14,7 @@ For the rest we will use only the *expr~* object to operate the input signal (*$
 
 ###### $v1%8000 == 0
 
-you will hear a pop for every "pattern", since it returns 1 each time the modulus resets (8 times in one of our 64000 loop). If you get here, there should be no problem understanding the rythmic aspect of it.
+you will hear a pop for every "pattern", since it returns 1 each time the modulus resets (8 times in one of our 64000 loop). If you got this, there should be no problem understanding the rythmic aspect of it.
 
 ## Square waves
 
@@ -30,7 +30,7 @@ In the video you'll notice that I ussually use the *(wave) * (envelope) * amplit
 
 ###### ( $v1%100<50 ) * ( $v1%8000 < 4000 )
 
-the amplitude of the square bass we made will be 1 the first half of the pattern and 0 the other half. But say you want it to sound at the begining of the pattern but with a shorter duration. Ok, you just decrease the condition like $v1%8000<1000. There are lots of crazy combinations you can do, like $v1%16000%3000 (it will go out beat but always to the floor each 2 patterns).
+the amplitude of the square bass we made will be 1 the first half of the pattern and 0 the other half. But say you want it to sound at the beginning of the pattern but with a shorter duration. Ok, you just decrease the condition like $v1%8000<1000. There are lots of crazy combinations you can do, like $v1%16000%3000 (it will go off beat but always to the floor each 2 patterns).
 
 And by adding a final multiplication you can controll the amplitude (normally from 0 to 1).
 
@@ -54,11 +54,11 @@ sin($v1) makes a sine wave and you can change the pitch by multiplying (* 0.5, o
 
 ###### ( $v1%1000 == 0 ) * sin( $v1 * 0.001 )                         The pop sound with some amplitude 
 
-###### sin( $v1 * 0.2 + sin ($v1 * 0.6) )                             Two operator 1:3 FM
+###### sin( $v1 * 0.2 + sin ($v1 * 0.6) )                             Two operator FM (1:3)
 
-###### sin( $v1 * 0.2 + sin ($v1 * 0.6) * (sin ($v1 * 0.0001) * 20)   The same but with one more operator that modulates the amp index.
+###### sin( $v1 * 0.2 + sin ($v1 * 0.6) * (sin ($v1 * 0.0001) * 20)   The same but plus one more operator index modulator
 
-*You'll probably noticed in the vid that FM high modulation index goes very noisy so you can make some crazy hihats and snares:
+*Probably noticed in the vid that FM high modulation index goes very noisy so you can make some crazy hihats and snares:
 
 ###### sin($v1+sin($v1) * 999)
 
