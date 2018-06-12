@@ -4,7 +4,7 @@ Do you know *bytebeat?* If not, you should. It's a very cheap and minimalistic w
 
 Well, since I do livecoding and I like to mess with synthesis, the general aspect of this technique (working just with time functions, combining logic + math) is just great for me and I did an example video with *Pure Data*, check https://youtu.be/eVdi0i-4WLk.  Here I'll explain the basics more or less in the same order of appearence than in the vid.
 
-###### The very basic concept subdividing the counting in small values so the cycle is audible as a pitch or subdividing it in big values to get rythms (amplitude envelopes, modulations, ...). So MODULUS (%) is your best friend.
+###### The very basic concept is subdividing the counting in small values so the cycle is audible as a pitch or subdividing it in big values to get rythms (amplitude envelopes, modulations, ...). So MODULUS (%) is your best friend.
 
 ## Time ramp
 
@@ -54,7 +54,7 @@ Now the condition changes over the time, making the width longer.  Try different
 
 Your input is an increasing number, so it is already a saw wave. You can play with modulus and get different pitches ***but carefull with the amplitude! Must divide the amplitude by the modulus or less (twice I recommend) if you don't want to blow your speakers with a  killer bytebeat saw of 99999 amplitude when 0-1 is the normal.*** It would be a great idea to put a *clip~ -1 1* before the *dac~.
 
-##### ( $v1%100 ) / 500   This is nice.
+##### $v1%100/250   This is nice.
 
 ## Sines!!!
 
