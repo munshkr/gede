@@ -1,0 +1,219 @@
+#N canvas 0 25 1366 694 10;
+#X obj 23 -24 cnv 15 368 65 empty empty empty 20 12 0 14 -13330 -66577
+0;
+#X obj 13 -14 cnv 15 368 65 empty empty empty 20 12 0 14 -4032 -66577
+0;
+#X obj 757 611 cnv 15 550 36 empty empty empty 20 12 0 14 -162280 -66577
+0;
+#X obj -2 240 cnv 15 628 167 empty empty empty 20 12 0 14 -232576 -66577
+0;
+#X obj 891 74 cnv 15 417 166 empty empty empty 20 12 0 14 -232576 -66577
+0;
+#X obj -2 408 cnv 15 1311 207 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj 627 239 cnv 15 682 171 empty empty empty 20 12 0 14 -204786
+-66577 0;
+#X obj -2 74 cnv 15 892 165 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 419 48 value c;
+#X obj 419 4 loadbang;
+#X obj 483 48 s~ one;
+#X obj 6 143 r~ one;
+#X obj 6 187 *~;
+#X obj 32 187 tgl 15 0 empty empty <--\ click\ me\ :D 17 7 0 10 -262144
+-1 -1 0 1;
+#X obj 6 209 dac~;
+#X text 6 83 saw: ($v1%X/X) * amp;
+#X obj 334 143 r~ one;
+#X obj 334 187 *~;
+#X obj 360 187 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 334 209 dac~;
+#X text 334 83 square: ($v1%X<Y);
+#X obj 636 143 r~ one;
+#X obj 636 187 *~;
+#X obj 662 187 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 636 209 dac~;
+#X text 636 83 gate: ($v1%X<Y);
+#X text 6 102 X = pitch;
+#X text 636 121 Y = duration;
+#X text 636 102 X = time figure;
+#X obj 906 143 r~ one;
+#X obj 906 187 *~;
+#X obj 932 187 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 906 209 dac~;
+#X obj 483 4 phasor~ 0.031;
+#X msg 419 26 256000;
+#X obj 483 27 expr~ int($v1*256000);
+#X text 906 83 AM: sin($v1/(c/pow(X \, 3)));
+#X text 906 102 X = speed;
+#X obj 906 303 r~ one;
+#X obj 906 347 *~;
+#X obj 932 347 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 906 369 dac~;
+#X obj 906 463 r~ one;
+#X obj 906 527 *~;
+#X obj 1072 527 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 1066 564 dac~;
+#X text 906 262 check X above 20;
+#X text 906 403 tip:;
+#X text 906 422 clone the line with different speed stereo \; );
+#X obj 1266 527 *~;
+#X obj 6 303 r~ one;
+#X obj 6 347 *~;
+#X obj 32 347 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 6 369 dac~;
+#X obj 334 303 r~ one;
+#X obj 334 347 *~;
+#X obj 360 347 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 334 369 dac~;
+#X text 334 243 PWM: >($v1/X%Y);
+#X text 334 263 X = speed;
+#X text 334 283 Y = width ammount (<X);
+#X text 334 103 Y = pulse width (<X);
+#X obj 637 303 r~ one;
+#X obj 637 347 *~;
+#X obj 663 347 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 637 369 dac~;
+#X text 636 262 modulus combination;
+#X text 636 281 recommend %8000 %16000;
+#X text 6 243 FM: sin($v1/X+sin($v1/Y)*Z);
+#X text 6 262 X:Y = operators ratio;
+#X text 6 281 Z = modulation ammount;
+#X obj 6 473 r~ one;
+#X obj 6 517 *~;
+#X obj 32 517 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 6 539 dac~;
+#X obj 336 473 r~ one;
+#X obj 336 573 *~;
+#X obj 362 573 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 336 595 dac~;
+#X text 6 432 modulate the ammount with +1 operator;
+#X obj 906 325 expr~ ($v1%32/32)*($v1%1000<500)*(sin($v1/(c/pow(20
+\, 3))))*0.2, f 63;
+#X obj 906 165 expr~ ($v1%32/32)*($v1%1000<500)*(sin($v1/(c/pow(7 \,
+3))))*0.2, f 63;
+#X text 336 432 use high modulations ammount to create noise;
+#X obj 637 325 expr~ ($v1%32/32)*($v1%8000%3000<600)*0.2;
+#X obj 636 165 expr~ ($v1%32/32)*($v1%1000<500)*0.15;
+#X obj 334 165 expr~ ($v1%32<16)*0.1;
+#X obj 6 165 expr~ ($v1%32/32)*0.1;
+#X obj 6 325 expr~ sin($v1/8+sin($v1/24)*10)*0.1;
+#X obj 6 495 expr~ sin($v1/8+sin($v1/24)*(sin($v1/1000)*10))*0.1;
+#X obj 906 485 expr~ ($v1%32/32)*($v1%1000<500)*(sin($v1/(c/pow(7 \,
+3))))*0.2 \; ($v1%32/32)*($v1%1000<500)*(sin($v1/(c/pow(9 \, 3))))*0.2
+, f 65;
+#X obj 334 325 expr~ ($v1%32>($v1/500%16))*($v1%1000<500)*0.15;
+#X obj 761 624 r~ one;
+#X obj 1052 623 *~;
+#X obj 1078 623 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 1019 624 dac~;
+#X text 1100 622 extra: a really aweful kick drum;
+#X obj 803 624 expr~ sin($v1/8)*($v1%4000<100)*0.3;
+#X obj 336 495 expr~ sin($v1*300+sin($v1*300)*9999)*($v1%1000<175)*0.075
+\; sin($v1+sin($v1)*999)*($v1%8000>4000&&$v1%4000<700)*0.15, f 67
+;
+#X text 24 -10 HI THERE! This is a very simple and quick guide through
+;
+#X text 24 9 the basic formulas I made for doing some fast and rythmic
+;
+#X text 24 28 livecoding taking advantage of pd synthesis power.;
+#X text 906 243 AM tip:;
+#X text 636 243 gate tip:;
+#X text 6 413 FM tip:;
+#X text 336 413 FM tip:;
+#X text 632 42 second). You can change the phasor value but------------>
+;
+#X text 1026 -28 I didn't figure it out how to avoid the nasty;
+#X text 1012 28 signals as array index so if you find how to do it
+;
+#X text 1022 47 without other object than expr~ PLEASE TELL ME!;
+#X text 631 3 The main goal was to play with just one signal generator.
+;
+#X text 632 23 I choose 256000 in 0.0313 Hz (something like 1 pattern
+per;
+#X obj 625 408 cnv 15 277 29 empty empty https://github.com/gabochi/gede
+20 12 0 14 -260097 -1 0;
+#X text 905 119 c = 256000 \, pow(X \, 3) so the cycle reset is a little
+smoother;
+#X text 6 121 X recommend power of 2 (so you don't hear a pop);
+#X text 1039 9 Unfortunatelly \, expr~ doesn't recognize;
+#X text 1041 -10 pops of not having a nice envelope :_(;
+#X text 4 568 Sines pops on reset... didn't find a sollution yet.;
+#X connect 9 0 34 0;
+#X connect 11 0 86 0;
+#X connect 12 0 14 0;
+#X connect 12 0 14 1;
+#X connect 13 0 12 1;
+#X connect 16 0 85 0;
+#X connect 17 0 19 0;
+#X connect 17 0 19 1;
+#X connect 18 0 17 1;
+#X connect 21 0 84 0;
+#X connect 22 0 24 0;
+#X connect 22 0 24 1;
+#X connect 23 0 22 1;
+#X connect 29 0 81 0;
+#X connect 30 0 32 0;
+#X connect 30 0 32 1;
+#X connect 31 0 30 1;
+#X connect 33 0 35 0;
+#X connect 34 0 8 0;
+#X connect 35 0 10 0;
+#X connect 38 0 80 0;
+#X connect 39 0 41 0;
+#X connect 39 0 41 1;
+#X connect 40 0 39 1;
+#X connect 42 0 89 0;
+#X connect 43 0 45 0;
+#X connect 44 0 43 1;
+#X connect 44 0 49 0;
+#X connect 49 0 45 1;
+#X connect 50 0 87 0;
+#X connect 51 0 53 0;
+#X connect 51 0 53 1;
+#X connect 52 0 51 1;
+#X connect 54 0 90 0;
+#X connect 55 0 57 0;
+#X connect 55 0 57 1;
+#X connect 56 0 55 1;
+#X connect 62 0 83 0;
+#X connect 63 0 65 0;
+#X connect 63 0 65 1;
+#X connect 64 0 63 1;
+#X connect 71 0 88 0;
+#X connect 72 0 74 0;
+#X connect 72 0 74 1;
+#X connect 73 0 72 1;
+#X connect 75 0 97 0;
+#X connect 76 0 78 0;
+#X connect 76 0 78 1;
+#X connect 77 0 76 1;
+#X connect 80 0 39 0;
+#X connect 81 0 30 0;
+#X connect 83 0 63 0;
+#X connect 84 0 22 0;
+#X connect 85 0 17 0;
+#X connect 86 0 12 0;
+#X connect 87 0 51 0;
+#X connect 88 0 72 0;
+#X connect 89 0 43 0;
+#X connect 89 1 49 1;
+#X connect 90 0 55 0;
+#X connect 91 0 96 0;
+#X connect 92 0 94 0;
+#X connect 92 0 94 1;
+#X connect 93 0 92 1;
+#X connect 96 0 92 0;
+#X connect 97 0 76 0;
+#X connect 97 1 76 0;
