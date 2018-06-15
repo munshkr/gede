@@ -80,6 +80,8 @@ Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo LFO. * 0.5 +
 
 ## in STEREO
 
+## PWM for old lang sine
+
 ## Ring
 
 ## FM
@@ -99,31 +101,31 @@ Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo LFO. * 0.5 +
 ## Copipasteá ameo
 
 Saw
-expr~ ($v1%   /   )
+>($v1%   /   )
 
 Square
-expr~ ($v1%   >   )
+>($v1%   >   )
 
 Sine
-expr~ sin($v1/  )
+>sin($v1/  )
 
 PWM
-expr~ $v1%   >$v1/   %
+>$v1%   >$v1/   %
 
 FM 2 op
-expr~ sin($v1/   +sin($v1/   )*   )
+>sin($v1/   +sin($v1/   )*   )
 
 FM 3 op
-expr~ sin($v1/   +sin($v1/   )* (sin($v1/    )*  ))
+>sin($v1/   +sin($v1/   )* (sin($v1/    )*  ))
 
 Gate
-expr~ $v1%(5510* )<(5510* )
+>$v1%(5510* )<(5510* )
 
 AM
-expr~ sin($v1/    )*0.5+0.5
+>sin($v1/    )*0.5+0.5
 
 Ring
-expr~ sin($v1*    )*0.5+0.5
+>sin($v1*    )*0.5+0.5
 
 Envelope
-expr~ if($v1%5510<  , pow($v1%  /  , 2), pow(1-($v1%5510/5510), 4))
+>if($v1%5510<  , pow($v1%  /  , 2), pow(1-($v1%5510/5510), 4))
