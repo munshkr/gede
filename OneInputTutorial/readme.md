@@ -1,9 +1,8 @@
-# OI (One Input) 
-# Tutorial para hacer livecoding con Pure Data
+# OI (One Input) Tutorial
 
 ## Descripción
 
-Hola! Armé este tutorial para __hacer livecoding en Pure Data usando muy pocos objetos__ pero puede servir para componer, aprender síntesis o incluso armar obras generativas. Básicamente necesitamos un *phasor~* y un *expr~* para procesar de distinta manera su señal, generando distintos tipos de síntesis y variaciones. Todo esto es producto de varios años de trabajo en casa y en vivo, de prueba y error, y espero que le ahorre tiempo a quien le interese para que pueda partir de una base y mejorarlo!
+Hola! Armé este tutorial para __hacer livecoding en Pure Data usando muy pocos objetos pero puede servir para componer, aprender síntesis o incluso armar obras generativas__. Básicamente necesitamos un *phasor~* y un *expr~* para procesar de distinta manera su señal, generando distintos tipos de síntesis y variaciones. Todo esto es producto de varios años de trabajo en casa y en vivo, de prueba y error, y espero que le ahorre tiempo a quien le interese para que pueda partir de una base y mejorarlo!
 
 ## ¿Por qué Pure Data?
 
@@ -33,62 +32,55 @@ __sin()__ seno, como si fuera un *osc~*, importantísimo sobre todo para las mod
 
 __<>|&=, etc__ los condicionales y booleanos son fundamentales.
 
-Probemos qué pasa, por ejemplo, si __llenamos el expr~ con 
-> $v1 %5510 == 0 
+Probemos qué pasa, por ejemplo, 
+> expr~ ($v1 %5510 == 0) * 0.1
 
 __y... listo! Tenemos un lindo pop en semicorcheas__. Si entendés por qué ya podés ser unx genix del glitch livecoding con Pd.
 
 ## Esquema general
 
-Para resumir las cosas podemos pensar en un esquema general que sería 
->__(forma de onda) * (gate) * (modulación) * amplitud__. 
-Más adelante vamos a ver cómo generar un elvonvente más prolijo, por ahora esto nos basta.
+Para resumir las cosas podemos pensar en un esquema general que sería __(forma de onda) * (gate) * (modulación) * amplitud__. 
+Más adelante vamos a ver cómo generar un elvonvente más prolijo, por ahora esto nos basta. Sigamos con las formas de onda cuidando la amplitud y después vamos a modulaciones...
 
 ## Saw : diente de sierra
 
 Generar una onda dentada es facilísimo porque nuestra función *ya es* una dentada ascendente. Nada más tenemos que subdividirla y normalizarla:
 
->__( $v1 %pitch / pitch )__ 
+> expr~ ( $v1 %200 / 200 ) * 0.1
 
-Cuanto más pequeña es la subdivisión, más agudo será el pitch, ya que la frecuencia será más rápida. *$v1%200/200* produce un tono más o menos medio como referente.
+Cuanto más pequeña es la subdivisión, más agudo será el pitch, ya que la frecuencia será más rápida. Probá modificando el 200 por otro valor, __no te olvides de siempre dividirlo por el mismo valor__.
 
 ## Square : onda cuadrada
 
 Una cuadrada son ceros y unos, una condición y ya está:
 
->__( $v1 %pitch > %ancho_de_pulso)__ 
+> expr~ ( $v1 %200 > 100) * 0.1
 
-Podemos probar distintos anchos de pulso y escuchar cómo varía el resultado armónico. *$v1 %200 > 100* produce una onda simétrica.
+Podemos probar distintos anchos de pulso que no sean simétricos y escuchemos cómo varía el resultado armónico. __Recordá que el ancho del pulso no puede ser mayor que el módulo ( % ).
 
 ## Sinusoide
 
->__sin( $v1 / pitch )__ 
+> expr~ sin( $v1 / pitch ) * 0.1 
 
-Para mantener la misma relación armónica entre sinusoides y dentadas/cuadradas podemos usar múltiplos de 8 para las primeras y de 50 para las segundas. 
-
->__$v1 %200 /200__ (50 * 4) es la misma nota que __sin( $v1 /64 )__ o __sin( $v1 /32 )__ (8 * 8 y 8 * 4). 
+Para __mantener la misma relación armónica entre sinusoides y dentadas/cuadradas podemos usar múltiplos de 8 para las primeras y de 50 para las segundas__. $v1 %200 / 200 (50 * 4) es la misma nota que sin( $v1 /64 ) o ( $v1 /32 ) (8 * 8 y 8 * 4). 
 
 ## *Glitching bells*
 Si en lugar de *dividir* la señal para obtener una frecuencia la *multiplicamos*, obtenemos un hermoso glitch:
->sin($v1 * 1024)
-
-## *Noisy chords and cheap ostinatto*
-(sin($v1/(16*$v1/10%10)))*0.01
+>expr~ sin($v1 * 1024) * 0.1
 
 ## Gates
 
 Antes de aprender cómo producir modulaciones es importante saber cómo hacer gates. Por cuestiones de simplicidad vamos a usar gates como si fueran envolventes. Probemos qué pasa si agregamos a alguna de nuestras ondas lo siguiente: 
 
->(onda) * ($v1 %5510 < 2205 )
->(onda) * ($v1 %cuándo < cuánto)
+>expr~ (sine($v1)) * ($v1 %5510 < 2205 )
 
-Dado que 5510 es la semicorchea, la mitad del tiempo la condición es verdadera y la otra mitad falsa. Hay muchísimas combinaciones posibles. Algo simple: podemos usar __$v1 %( 5510 * 8 ) < 5510__ para que la condición sea verdadera durante la primera semicorchea de un grupo de 8 (blanca).
+Dado que 5510 es la semicorchea, la mitad del tiempo la condición es verdadera y la otra mitad falsa. Hay muchísimas combinaciones posibles. Algo simple: podemos usar *$v1%(5510 * 8)<5510* para que la condición sea verdadera durante la primera semicorchea de un grupo de 8 (blanca).
 
 ## Modulaciones
 
 Ahora que tenemos un sonido y su "envolvente" podemos probar algunas modulaciones. Lo más fácil para empezar es modular la amplitud:
 
->(onda) * (gate) * (sin ($v1 /3000) * 0.5 + 0.5 )
+>expr~ sin (8 * $v1 / 10 %10) * ($v1 %5510 < 2205 ) * (sin ($v1 /3000) * 0.5 + 0.5 ) * 0.1
 
 Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo *LFO*. * 0.5 + 0.5 normalizan el resultado ya que la función *sin* devuelve entre 1 y -1.
 
@@ -98,47 +90,45 @@ __El poder de la AM: Tan sólo con estos pocos elementos ya podemos generar un l
 
 Las expresiones pueden separarse con ;. Cada expresión se corresponde con un outlet del objeto. Un recurso valioso es aprovechar el stereo por ejemplo: copiemos la línea anterior pero modifiquemos la frecuencia de modulación y hagamos que cada outlet vaya a un canal distinto.
 
->(onda) * (gate) * (sin($v1/3000) * 0.5 + 0.5);
->(onda) * (gate) * (sin($v1/4000) * 0.5 + 0.5)
+>expr~ sin (8 * $v1 / 10 %10) * ($v1 %5510 < 2205 ) * (sin ($v1 /3000) * 0.5 + 0.5 ) * 0.1;
+sin (8 * $v1 / 10 %10) * ($v1 %5510 < 2205 ) * (sin ($v1 /4000) * 0.5 + 0.5 ) * 0.1
 
 ## Aquellos buenos tiempos : PWM
 
 ¿Alguien dijo chiptune?
 
->($v1 %pitch > $V1 /tiempo %ancho)
->($v1 %200 > $v1 /1000 %100)
+>expr~ ($v1 %200 > $v1 /1000 %100) * 0.1
 
-Esta técnica puede utilizarse para agrandar o achicar las duraciones de los gates.
+Esta técnica puede utilizarse también, por ejemplo, para agrandar o achicar las duraciones de los gates.
 
 ## Ring
 
 Si modulamos la amplitud a frecuencias audibles tenemos *ring modulation* 
->($v1 %100 /100) * (sin($v1 /65))
+>expr~ ($v1 %100 /100) * (sin($v1 /65)) * 0.1
 
 ## FM
 
 La síntesis de frecuencia modulada es explotable a muchísimos niveles. Dado que podemos usarla para producir formas de onda muy ricas en armónicos y modulaciones, siempre con la opción de volverla más compleja agregando operadores.
 
->sin($v1 /pitch + sin ($v1 /pitch) * amplitud)
->sin($v1 /64 + sin ($v1 /128) * 10)
+>expr~ (sin($v1 /64 + sin ($v1 /128) * 10) * 0.1
 
 Ahí tenemos una FM de dos operadores de razón 1:2. Podemos cambiar de razón y amplitud para obtener distintos resultados tímbricos. Cuando modulamos con amplitud muy alta producimos ruido (muy útil para percusión):
 
->sin($v1 /64 + sin ($v1 /128) * 9999)
+>expr~ sin($v1 /64 + sin ($v1 /128) * 9999) * 0.1
 
 También agregar otro operador que module, por ejemplo, a la amplitud:
 
->sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * 20))
+>expr~ sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * 20)) * 0.1
 
 ¿Qué tal cuatro operadores?
 
->sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))
+>expr~ (sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))) * 0.1
 
 ## ONE-LINE IDM TRACK !
 
 Agregando un gate y haciendo las debidas modificaciones ya tenemos un track de IDM en una fórmula:
 
->(sin($v1 /128 + sin($v1 /512) * (sin($v1 /3000) * sin($v1 /10000) * 1999))) * ($v1 %5510 < 700)
+>expr~ (sin($v1 /128 + sin($v1 /512) * (sin($v1 /3000) * sin($v1 /10000) * 1999))) * ($v1 %5510 < 700)
 
 Démosle un poco de complejidad y estéreo:
 
@@ -160,12 +150,12 @@ En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más g
 
 ### Kick pop
 Si buscamos un resultado bailable es imprescindible un kick bien duro y marcado en negras. No se me ocurre una manera más simple y rápida que 
->($v1 %(5510 * 4) < duración)
+>expr~ ($v1 %(5510 * 4) < 200) * 0.1
 la duración entre 10-300 aprox. nos va a dar distintos timbres y profundidades para nuestro kick. Ya que *la operación es bastante violenta recomiendo meterlo y regularlo con cuidado (o dedicarse a lo ambiental para menos stress)*. 
 
-### Arpegios y secuencias
+### "Acordes", arpegios y secuencias
 Podemos hacer desde arpegios hasta acordes ruidosos con la siguiente fórmula
->sin (8 * $v1 / 10 %10)
+>expr~ sin (8 * $v1 / 10 %10) * 0.1
 probá cambiando los valores. La misma lógica obviamente aplica a cualquier otro tipo de *secuencia* que no sea de pitches.
 
 ### Generatividad
