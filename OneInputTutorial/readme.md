@@ -19,7 +19,7 @@ __Es aconsejable poner un clip~ -1 1 a la salida del expr~ para no mandar señal
 
 Ya que todo lo vamos a hacer con *expr~*, tengan en cuenta que de aquí en más vamos a generar distintos sonidos con fórmulas aplicadas a esa función lineal. Algunas cuestiones generales para tener en cuenta son: 
 
-__0.1__ 1 pulso por segundo, si lo modificamos cambia el tiempo y el pitch.
+__0.01__ 1 pulso por segundo, si lo modificamos cambia el tiempo y el pitch.
 
 __5510__ es una suerte de semicorchea (tendríamos diez compases de 2/4).
 
@@ -96,7 +96,7 @@ Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo LFO. * 0.5 +
 -- pop kick (<)400
 -- sdgfsdg43t443gdgfdf
 
-## Quick refference
+## Copipasteá ameo
 
 Saw
 expr~ ($v1%   /   )
