@@ -134,6 +134,9 @@ También agregar otro operador que module, por ejemplo, a la amplitud:
 
 >__sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))
 
+Agregando un gate y haciendo las debidas modificaciones ya tenemos un track de IDM en una fórmula:
+
+>__(sin($v1 /64 + sin($v1 /256) * (sin($v1 /3000) * sin($v1 /10000) * 999))) * ($v1 %5510 < $v1 /5000 %2500)
 
 ## Ahora sí: Envolventes
 
