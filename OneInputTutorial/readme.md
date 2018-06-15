@@ -12,7 +12,7 @@ Existen muchísimos lenguajes para hacer livecoding que son excelentes y no ser�
 
 Para arrancar necesitamos conectar un *phasor~* a un multiplicador. Vamos a poner un *phasor~ 0.01* a un * ~ 4408000. Esto va a generar una rampa de 0 a 4407999, o sea que el largo total del live-loop va a ser de *100 segundos*. Nada mal si consideramos que vamos a ir haciendo modificaciones mínimas sobre la marcha, que está muy cercano a una calidad óptima de 44100 samples por segundo y -sobre todo- __las modulaciones pueden generar entonces casi 2 minutos de variaciones sin repetición a partir de dos o tres ideas básicas__. A la salida del multiplicador conectamos un *expr~* que es donde la magia va a ocurrir, y lo demás es ir al *dac~*. Es aconsejable poner un clip~ -1 1 a la salida del expr~ para no mandar señales de mucha amplitud por error.
 
-!(https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/start.jpg)
+![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/start.jpg)
 
 ## Fórmulas everywhere
 
