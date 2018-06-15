@@ -19,12 +19,17 @@ __Es aconsejable poner un clip~ -1 1 a la salida del expr~ para no mandar señal
 Ya que todo lo vamos a hacer con *expr~*, tengan en cuenta que de aquí en más vamos a generar distintos sonidos con fórmulas aplicadas a esa función lineal. Algunas cuestiones generales para tener en cuenta son: 
 
 __0.1__ 1 pulso por segundo, si lo modificamos cambia el tiempo y el pitch.
+
 __5510__ es una suerte de semicorchea (tendríamos diez compases de 2/4).
 
 __$v1__ es el valor actual que devuelve la función *phasor~*.
+
 __%__ el módulo lo es todo, lo vamos a usar un montón para subdividir la función.
+
 __*__ la multiplicación va a separar distintos términos de las fórmulas, generalmente implica amplitud.
+
 __sin()__ seno, como si fuera un *osc~*, importantísimo sobre todo para las modulaciones.
+
 __<>|&=, etc__ los condicionales y booleanos son fundamentales.
 
 Probemos qué pasa, por ejemplo, si __llenamos el expr~ con $v1%5510==0 y... listo! Tenemos un lindo pop en semicorcheas__. Si entendés por qué ya podés ser unx genix del glitch livecoding con Pd.
