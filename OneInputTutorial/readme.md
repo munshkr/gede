@@ -81,7 +81,7 @@ Dado que 5510 es la semicorchea, la mitad del tiempo la condición es verdadera 
 
 Ahora que tenemos un sonido y su "envolvente" podemos probar algunas modulaciones. Lo más fácil para empezar es modular la amplitud:
 
->__(onda) * (gate) * (sin ($v1 /3000) * 0.5 + 0.5 )__
+>(onda) * (gate) * (sin ($v1 /3000) * 0.5 + 0.5 )__
 
 Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo *LFO*. * 0.5 + 0.5 normalizan el resultado ya que la función *sin* devuelve entre 1 y -1.
 
@@ -91,58 +91,58 @@ __El poder de la AM: Tan sólo con estos pocos elementos ya podemos generar un l
 
 Las expresiones pueden separarse con ;. Cada expresión se corresponde con un outlet del objeto. Un recurso valioso es aprovechar el stereo por ejemplo: copiemos la línea anterior pero modifiquemos la frecuencia de modulación y hagamos que cada outlet vaya a un canal distinto.
 
->__(onda) * (gate) * (sin($v1/3000) * 0.5 + 0.5);__
->__(onda) * (gate) * (sin($v1/4000) * 0.5 + 0.5)__
+>(onda) * (gate) * (sin($v1/3000) * 0.5 + 0.5);__
+>(onda) * (gate) * (sin($v1/4000) * 0.5 + 0.5)__
 
 
 ## Aquellos buenos tiempos : PWM
 
 ¿Alguien dijo chiptune?
 
->__($v1 %pitch > $V1 /tiempo %ancho)
->($v1 %200 > $v1 /1000 %100)__
+>($v1 %pitch > $V1 /tiempo %ancho)
+>($v1 %200 > $v1 /1000 %100)
 
 Esta técnica puede utilizarse para agrandar o achicar las duraciones de los gates.
 
 ## Ring glitch <3
 
 Si modulamos la amplitud a frecuencias audibles tenemos *ring modulation* 
->__($v1 %100 /100) * (sin($v1 /65))
+>($v1 %100 /100) * (sin($v1 /65))
 
 y por frecuencias ridículamente altas glitchea por nuestro "sample rate".
->__(onda) * (gate) * (sin($v1 * 999))
+>(onda) * (gate) * (sin($v1 * 999))
 
 Podemos loopear el glitch con un módulo
->__(onda) * (gate) * (sin($v1 %80000 * 9999))
+>(onda) * (gate) * (sin($v1 %80000 * 9999))
 
 ## FM
 
 La síntesis de frecuencia modulada es explotable a muchísimos niveles. Dado que podemos usarla para producir formas de onda muy ricas en armónicos y modulaciones, siempre con la opción de volverla más compleja agregando operadores.
 
->__sin($v1 /pitch + sin ($v1 /pitch) * amplitud)
->__sin($v1 /64 + sin ($v1 /128) * 10)
+>sin($v1 /pitch + sin ($v1 /pitch) * amplitud)
+>sin($v1 /64 + sin ($v1 /128) * 10)
 
 Ahí tenemos una FM de dos operadores de razón 1:2. Podemos cambiar de razón y amplitud para obtener distintos resultados tímbricos. Cuando modulamos con amplitud muy alta producimos ruido (muy útil para percusión):
 
->__sin($v1 /64 + sin ($v1 /128) * 9999)
+>sin($v1 /64 + sin ($v1 /128) * 9999)
 
 También agregar otro operador que module, por ejemplo, a la amplitud:
 
->__sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * 20))
+>sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * 20))
 
 ¿Qué tal cuatro operadores?
 
->__sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))
+>sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))
 
 ## ONE-LINE IDM TRACK !
 
 Agregando un gate y haciendo las debidas modificaciones ya tenemos un track de IDM en una fórmula:
 
->__(sin($v1 /128 + sin($v1 /512) * (sin($v1 /3000) * sin($v1 /10000) * 1999))) * ($v1 %5510 < 700)
+>(sin($v1 /128 + sin($v1 /512) * (sin($v1 /3000) * sin($v1 /10000) * 1999))) * ($v1 %5510 < 700)
 
 Démosle un poco de complejidad y estéreo:
 
->__expr~ (sin($v1/64+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700) * (sin($v1/6000) * 0.5+0.5);
+>expr~ (sin($v1/64+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700) * (sin($v1/6000) * 0.5+0.5);
 (sin($v1/128+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700)* (sin($v1/4000) * 0.5+0.5)
 
 *;) para los amantes de Aphex
@@ -151,8 +151,8 @@ Démosle un poco de complejidad y estéreo:
 
 Si sobrevivimos a la FM ya podemos pasar a los envolventes. Son importantes para evitar los pops que resultan de multiplicar la amplitud de 0 a 1 constantemente como hacemos con los gates. Necesitan ser manejados de manera particular, multiplicando la señal que queremos envolver por un if:
 
->__if($v1 %figura < ataque, pow($v1 %ataque/ataque, exponente), pow(1-($v1 %figura/figura), exponente))
->__if($v1 %5510 < 10, pow($v1 %10/10, 2), pow(1-($v1 %5510/5510), 5))
+>if($v1 %figura < ataque, pow($v1 %ataque/ataque, exponente), pow(1-($v1 %figura/figura), exponente))
+>if($v1 %5510 < 10, pow($v1 %10/10, 2), pow(1-($v1 %5510/5510), 5))
 
 En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más grande sea el exponente, más pronunciada será la curva de amplificación.  
 
