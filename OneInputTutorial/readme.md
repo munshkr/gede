@@ -68,6 +68,13 @@ Para mantener la misma relación armónica entre sinusoides y dentadas/cuadradas
 
 >__$v1 %200 /200__ (50 * 4) es la misma nota que __sin( $v1 /64 )__ o __sin( $v1 /32 )__ (8 * 8 y 8 * 4). 
 
+## *Glitching bells*
+Si en lugar de *dividir* la señal para obtener una frecuencia la *multiplicamos*, obtenemos un hermoso glitch:
+>sin($v1 * 1024)
+
+## *Noisy chords and cheap ostinatto*
+(sin($v1/(16*$v1/10%10)))*0.01
+
 ## Gates
 
 Antes de aprender cómo producir modulaciones es importante saber cómo hacer gates. Por cuestiones de simplicidad vamos a usar gates como si fueran envolventes. Probemos qué pasa si agregamos a alguna de nuestras ondas lo siguiente: 
@@ -81,7 +88,7 @@ Dado que 5510 es la semicorchea, la mitad del tiempo la condición es verdadera 
 
 Ahora que tenemos un sonido y su "envolvente" podemos probar algunas modulaciones. Lo más fácil para empezar es modular la amplitud:
 
->(onda) * (gate) * (sin ($v1 /3000) * 0.5 + 0.5 )__
+>(onda) * (gate) * (sin ($v1 /3000) * 0.5 + 0.5 )
 
 Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo *LFO*. * 0.5 + 0.5 normalizan el resultado ya que la función *sin* devuelve entre 1 y -1.
 
@@ -91,9 +98,8 @@ __El poder de la AM: Tan sólo con estos pocos elementos ya podemos generar un l
 
 Las expresiones pueden separarse con ;. Cada expresión se corresponde con un outlet del objeto. Un recurso valioso es aprovechar el stereo por ejemplo: copiemos la línea anterior pero modifiquemos la frecuencia de modulación y hagamos que cada outlet vaya a un canal distinto.
 
->(onda) * (gate) * (sin($v1/3000) * 0.5 + 0.5);__
->(onda) * (gate) * (sin($v1/4000) * 0.5 + 0.5)__
-
+>(onda) * (gate) * (sin($v1/3000) * 0.5 + 0.5);
+>(onda) * (gate) * (sin($v1/4000) * 0.5 + 0.5)
 
 ## Aquellos buenos tiempos : PWM
 
@@ -104,16 +110,10 @@ Las expresiones pueden separarse con ;. Cada expresión se corresponde con un ou
 
 Esta técnica puede utilizarse para agrandar o achicar las duraciones de los gates.
 
-## Ring glitch <3
+## Ring
 
 Si modulamos la amplitud a frecuencias audibles tenemos *ring modulation* 
 >($v1 %100 /100) * (sin($v1 /65))
-
-y por frecuencias ridículamente altas glitchea por nuestro "sample rate".
->(onda) * (gate) * (sin($v1 * 999))
-
-Podemos loopear el glitch con un módulo
->(onda) * (gate) * (sin($v1 %80000 * 9999))
 
 ## FM
 
@@ -154,20 +154,26 @@ Si sobrevivimos a la FM ya podemos pasar a los envolventes. Son importantes para
 >if($v1 %figura < ataque, pow($v1 %ataque/ataque, exponente), pow(1-($v1 %figura/figura), exponente))
 >if($v1 %5510 < 10, pow($v1 %10/10, 2), pow(1-($v1 %5510/5510), 5))
 
-En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más grande sea el exponente, más pronunciada será la curva de amplificación.  
-
-
-## Generatividad
+En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más grande sea el exponente, más pronunciada será la curva de amplificación. *No te asustes, según el resultado buscado y la premura de la ejecución en vivo, podemos prescindir totalmente de los envolventes y trabajar únicamente con los gates.
 
 ## Tips
 
--- secuencias de notas
--- acordes ruidosos
--- otras secuencias
--- pop kick (<)400
--- sdgfsdg43t443gdgfdf
+### Kick pop
+Si buscamos un resultado bailable es imprescindible un kick bien duro y marcado en negras. No se me ocurre una manera más simple y rápida que 
+>($v1 %(5510 * 4) < duración)
+la duración entre 10-300 aprox. nos va a dar distintos timbres y profundidades para nuestro kick. Ya que *la operación es bastante violenta recomiendo meterlo y regularlo con cuidado (o dedicarse a lo ambiental para menos stress)*. 
 
-## Copipasteá ameo
+### Arpegios y secuencias
+Podemos hacer desde arpegios hasta acordes ruidosos con la siguiente fórmula
+>sin (8 * $v1 / 10 %10)
+probá cambiando los valores. La misma lógica obviamente aplica a cualquier otro tipo de *secuencia* que no sea de pitches.
+
+### Generatividad
+
+El live-loop de 100 segundos ya produce bastantes variaciones además de las que podemos ir introducionendo en vivo pero si queremos agregar elementos de generatividad podemos usar más de una señal. Por ejemplo usando varios *phasor~* conectados a nuestro *expr~* a través de un *samphold~* sincronizado al loop principal.
+
+## Copipasteá!
+Acá te dejo las fórmulas vacías para que puedas copipastearlas y combinarlas de manera más rápida:
 
 Saw
 >($v1%   /   )
@@ -189,6 +195,9 @@ FM 3 op
 
 FM 4 op
 >sin($v1 / + sin($v1 / ) * (sin($v1 / ) * sin($v1 / ) * ))
+
+Arpeggio:
+8 * $v1 /   %
 
 Gate
 >$v1%(5510* )<(5510* )
