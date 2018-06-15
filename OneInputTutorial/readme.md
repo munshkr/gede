@@ -104,14 +104,36 @@ Las expresiones pueden separarse con ;. Cada expresión se corresponde con un ou
 
 Esta técnica puede utilizarse para agrandar o achicar las duraciones de los gates.
 
-## Ring
+## Ring glitch <3
 
-Si modulamos la amplitud a frecuencias audibles tenemos *ring modulation*
->__(onda) * (gate) * (sin($v1%440800 * 9999))
+Si modulamos la amplitud a frecuencias audibles tenemos *ring modulation* 
+>__($v1 %100 /100) * (sin($v1 /65))
 
-Vean qué pasa cuando tiramos valores exagerados (este glitch es de mis favoritos):
+y por frecuencias ridículamente altas glitchea por nuestro "sample rate".
+>__(onda) * (gate) * (sin($v1 * 999))
+
+Podemos loopear el glitch con un módulo
+>__(onda) * (gate) * (sin($v1 %80000 * 9999))
 
 ## FM
+
+La síntesis de frecuencia modulada es explotable a muchísimos niveles. Dado que podemos usarla para producir formas de onda muy ricas en armónicos y modulaciones, siempre con la opción de volverla más compleja agregando operadores.
+
+>__sin($v1 /pitch + sin ($v1 /pitch) * amplitud)
+>__sin($v1 /64 + sin ($v1 /128) * 10)
+
+Ahí tenemos una FM de dos operadores de razón 1:2. Podemos cambiar de razón y amplitud para obtener distintos resultados tímbricos. Cuando modulamos con amplitud muy alta producimos ruido (muy útil para percusión):
+
+>__sin($v1 /64 + sin ($v1 /128) * 9999)
+
+También agregar otro operador que module, por ejemplo, a la amplitud:
+
+>__sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * 20))
+
+¿Qué tal cuatro operadores?
+
+>__sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))
+
 
 ## Ahora sí: Envolventes
 
@@ -144,6 +166,9 @@ FM 2 op
 
 FM 3 op
 >sin($v1/   +sin($v1/   )* (sin($v1/    )*  ))
+
+FM 4 op
+>sin($v1 / + sin($v1 / ) * (sin($v1 / ) * sin($v1 / ) * ))
 
 Gate
 >$v1%(5510* )<(5510* )
