@@ -134,11 +134,28 @@ También agregar otro operador que module, por ejemplo, a la amplitud:
 
 >__sin($v1 /64 + sin($v1 /128) * (sin($v1 /44080) * sin($v1 /440800) * 222))
 
+## ONE-LINE IDM TRACK !
+
 Agregando un gate y haciendo las debidas modificaciones ya tenemos un track de IDM en una fórmula:
 
->__(sin($v1 /64 + sin($v1 /256) * (sin($v1 /3000) * sin($v1 /10000) * 999))) * ($v1 %5510 < $v1 /5000 %2500)
+>__(sin($v1 /128 + sin($v1 /512) * (sin($v1 /3000) * sin($v1 /10000) * 1999))) * ($v1 %5510 < 700)
+
+Démosle un poco de complejidad y estéreo:
+
+>__expr~ (sin($v1/64+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700) * (sin($v1/6000) * 0.5+0.5);
+(sin($v1/128+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700)* (sin($v1/4000) * 0.5+0.5)
+
+*;) para los amantes de Aphex
 
 ## Ahora sí: Envolventes
+
+Si sobrevivimos a la FM ya podemos pasar a los envolventes. Son importantes para evitar los pops que resultan de multiplicar la amplitud de 0 a 1 constantemente como hacemos con los gates. Necesitan ser manejados de manera particular, multiplicando la señal que queremos envolver por un if:
+
+>__if($v1 %figura < ataque, pow($v1 %ataque/ataque, exponente), pow(1-($v1 %figura/figura), exponente))
+>__if($v1 %5510 < 10, pow($v1 %10/10, 2), pow(1-($v1 %5510/5510), 5))
+
+En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más grande sea el exponente, más pronunciada será la curva de amplificación.  
+
 
 ## Generatividad
 
