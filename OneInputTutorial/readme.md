@@ -1,5 +1,7 @@
 # OI (One Input) Tutorial
 
+[Descripción][1]
+
 ## Descripción
 
 Hola! Armé este tutorial para __hacer livecoding en Pure Data usando muy pocos objetos pero puede servir para componer, aprender síntesis o incluso armar obras generativas__. Básicamente necesitamos un *phasor~* y un *expr~* para procesar de distinta manera su señal, generando distintos tipos de síntesis y variaciones. Todo esto es producto de varios años de trabajo en casa y en vivo, de prueba y error, y espero que le ahorre tiempo a quien le interese para que pueda partir de una base y mejorarlo!
@@ -200,3 +202,5 @@ Ring
 
 Envelope
 >if($v1%5510<  , pow($v1%  /  , 2), pow(1-($v1%5510/5510), 4))
+
+[1]: https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/readme.md##Descripción
