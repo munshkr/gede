@@ -85,7 +85,7 @@ Ahora que tenemos un sonido y su "envolvente" podemos probar algunas modulacione
 
 Listo! Modulamos la amplitud con una sinusoide muy lenta, al estilo *LFO*. * 0.5 + 0.5 normalizan el resultado ya que la función *sin* devuelve entre 1 y -1.
 
-__El poder de la AM: Tan sólo con estos pocos elementos ya podemos generar un loop de casi dos minutos sin repetición ya que lo aconsejable es desfazar la modulación respecto del pulso, provocando una polyrythmical madness!!!
+__El poder de la AM: Tan sólo con estos pocos elementos ya podemos generar un loop de casi dos minutos sin repetición ya que lo aconsejable es desfazar la modulación respecto del pulso, provocando una polyrythmical madness!!!__
 
 ## in STEREO
 
