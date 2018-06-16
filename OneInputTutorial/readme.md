@@ -148,16 +148,45 @@ En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más g
 ### Kick pop
 Si buscamos un resultado bailable es imprescindible un kick bien duro y marcado en negras. No se me ocurre una manera más simple y rápida que 
 >expr~ ($v1 %(5510 * 4) < 200) * 0.1
-la duración entre 10-300 aprox. nos va a dar distintos timbres y profundidades para nuestro kick. Ya que *la operación es bastante violenta recomiendo meterlo y regularlo con cuidado (o dedicarse a lo ambiental para menos stress)*. 
+o podemos desarmarlo un poco para que no queme tanto la cabeza:
+>expr~ ($v1% (5510 * 16) %(5510 * 7) < 10) * 0.1
+>expr~ ($v1% (5510 * 32) %(5510 * 6) < 10) * 0.1
+>expr~ ($v1% (5510 * 16) %(5510 * 3) < 10) * 0.2
+>expr~ ($v1% (5510 * 32) > (5510 * 24) && $v1% 5510 < 25) * 0.2
+
+la duración de la condición nos va a dar distintos timbres y profundidades. Ya que *la operación es bastante violenta recomiendo meterlo y regularlo con cuidado*. 
 
 ### *Glitching bells*
 Si usamos *sin* y en lugar de *dividir* la señal para obtener una frecuencia la *multiplicamos*, obtenemos un hermoso glitch:
 >expr~ sin($v1 * 1024) * 0.1
+Para loopear la parte que queremos agregamos un módulo:
+>expr~ sin($v1 %200000 * 1024) * 0.1
+En el siguiente tip vamos a conseguir un resultado parecido desde otro lugar pero también con *sin*.
 
-### "Acordes", arpegios y secuencias
-Podemos hacer desde arpegios hasta acordes ruidosos con la siguiente fórmula
->expr~ sin (8 * $v1 / 10 %10) * 0.1
-probá cambiando los valores. La misma lógica obviamente aplica a cualquier otro tipo de *secuencia* que no sea de pitches.
+### Arpegios, secuencias y *más glitches*
+Al dividir la señal y pasarla por un módulo ($v1/...%...) podemos armar secuencias. Probemos:
+
+>expr~ ($v1% ($v1 /5510 %7 * 100) < 50) * 0.05
+
+>expr~ ($v1% ($v1 /5510 %4 * 50) < 25) * 0.05
+
+>expr~ ($v1%($v1/5510 %10%6 * 50) /500) * 0.05
+
+>expr~ ($v1%($v1/5510%8 * 50) / ($v1 /5510 %8 * 50)) * 0.05
+
+>expr~ ($v1%($v1/2500%100) / ($v1/2500%100)) * 0.025
+
+Y a velocidades absurdas con *sin*, prescindiendo de la división, el resultado te puede interesar...
+
+>expr~ sin (8 * $v1 %10) * 0.05
+
+>expr~ sin (20 * $v1 %50) * 0.05
+
+>expr~ sin (4 * $v1 %30) * 0.05
+
+>expr~ sin (32 * $v1 %600) * 0.05
+
+>expr~ sin (32 * $v1 %110%32) * 0.05
 
 ### Generatividad
 
@@ -167,39 +196,33 @@ El live-loop de 100 segundos ya produce bastantes variaciones además de las que
 Acá te dejo las fórmulas vacías para que puedas copipastearlas y combinarlas de manera más rápida:
 
 Saw
->($v1%   /   )
+>($v1%.../...)
 
 Square
->($v1%   >   )
+>($v1%...>...)
 
 Sine
->sin($v1/  )
+>(sin($v1/...))
 
 PWM
->$v1%   >$v1/   %
+>($v1%...>$v1/...%...)
 
 FM 2 op
->sin($v1/   +sin($v1/   )*   )
+>(sin($v1/...+sin($v1/...) * ...))
 
 FM 3 op
->sin($v1/   +sin($v1/   )* (sin($v1/    )*  ))
+>(sin($v1/...+sin($v1/...) * (sin($v1/...) * ...)))
 
 FM 4 op
->sin($v1 / + sin($v1 / ) * (sin($v1 / ) * sin($v1 / ) * ))
-
-Arpeggio:
-8 * $v1 /   %
+>(sin($v1/...+sin($v1/...) * (sin($v1/...) * sin($v1/...) * ...)))
 
 Gate
->$v1%(5510* )<(5510* )
+>($v1%(5510 * ...)<(5510 * ...))
 
 AM
->sin($v1/    )*0.5+0.5
+>(sin($v1/...)* 0.5 + 0.5)
 
-Ring
->sin($v1*    )*0.5+0.5
-
-Envelope
->if($v1%5510<  , pow($v1%  /  , 2), pow(1-($v1%5510/5510), 4))
+Envelope semicorchea
+>if($v1%5510<..., pow($v1%.../..., 2), pow(1-($v1%5510/5510), 4))
 
 [1]: https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/readme.md##Descripción
