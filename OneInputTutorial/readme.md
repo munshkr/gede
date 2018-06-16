@@ -65,10 +65,6 @@ __Recordá que el ancho del pulso no puede ser mayor que el módulo ( % )__.
 
 Para __mantener la misma relación armónica entre sinusoides y dentadas/cuadradas podemos usar múltiplos de 8 para las primeras y de 50 para las segundas__. $v1 %200 / 200 (50 * 4) es la misma nota que sin( $v1 /64 ) o ( $v1 /32 ) (8 * 8 y 8 * 4). 
 
-## *Glitching bells*
-Si en lugar de *dividir* la señal para obtener una frecuencia la *multiplicamos*, obtenemos un hermoso glitch:
->expr~ sin($v1 * 1024) * 0.1
-
 ## Gates
 
 Antes de aprender cómo producir modulaciones es importante saber cómo hacer gates. Por cuestiones de simplicidad vamos a usar gates como si fueran envolventes. Probemos qué pasa si agregamos a alguna de nuestras ondas lo siguiente: 
@@ -136,7 +132,7 @@ Démosle un poco de complejidad y estéreo:
 >expr~ (sin($v1/64+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700) * (sin($v1/6000) * 0.5+0.5);
 (sin($v1/128+sin($v1/512) * (sin($v1/3000) * sin($v1/10000) * 1999))) * ($v1%5510<700)* (sin($v1/4000) * 0.5+0.5)
 
-*;) para los amantes de Aphex
+*;) para los amantes de Aphex*
 
 ## Ahora sí: Envolventes
 
@@ -153,6 +149,10 @@ En el ejemplo hay un envolvente de ataque rápido en semicorcheas. Cuanto más g
 Si buscamos un resultado bailable es imprescindible un kick bien duro y marcado en negras. No se me ocurre una manera más simple y rápida que 
 >expr~ ($v1 %(5510 * 4) < 200) * 0.1
 la duración entre 10-300 aprox. nos va a dar distintos timbres y profundidades para nuestro kick. Ya que *la operación es bastante violenta recomiendo meterlo y regularlo con cuidado (o dedicarse a lo ambiental para menos stress)*. 
+
+### *Glitching bells*
+Si usamos *sin* y en lugar de *dividir* la señal para obtener una frecuencia la *multiplicamos*, obtenemos un hermoso glitch:
+>expr~ sin($v1 * 1024) * 0.1
 
 ### "Acordes", arpegios y secuencias
 Podemos hacer desde arpegios hasta acordes ruidosos con la siguiente fórmula
