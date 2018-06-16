@@ -1,63 +1,65 @@
+# Hola!
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/01.png)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/02.png)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/03.png)
-###pop
+### pop
 ($v1%5510<10)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/04.png)
-###saw
+## Formas de onda
+### saw
 ($v1%400/400)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/05.png)
-###square
+### square
 ($v1%400<200)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/06.png)
-###sine
+### sine
 sin($v1/64)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/07.png)
-###GATE
+### GATE
 ($v1%(5510 * 4)<4000)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/08.png)
-##Modulando
+## Modulando
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/09.png)
-###AM
+### AM
 (sin($v1/1000) * 0.5+0.5)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/10.png)
-###stereo
+### stereo
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/11.png)
-###PWM
+### PWM
 ($v1 %400>$v1 /100 %200 +50)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/12.png)
-###Ring
+### Ring
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/13.png)
-###Glitching loops
+### Glitching loops
 sin($v1%320000 * 9999)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/14.png)
-###FM 2 operadores
+### FM 2 operadores
 sin($v1/64+sin($v1/128) * 10)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/15.png)
-###FM 3 operadores
+### FM 3 operadores
 sin($v1/64+sin($v1/32) * sin($v1/2000) * 20)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/16.png)
-###FM 4 operadores
+### FM 4 operadores
 sin($v1/64+sin($v1/32) * sin($v1/2000) * sin($v1/200000) * 50)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/17.png)
-###FM 5 operadores
+### FM 5 operadores
 sin($v1/64+sin($v1/32) * sin($v1/2000+sin($v1/10000)) * sin($v1/200000) * 50) * 0.1
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/18.png)
-##Instant Insane IDM
+## Instant Insane IDM (Interludio)
 sin($v1/32+sin($v1/32) * sin($v1/2100+sin($v1/10000)) * sin($v1/201000) * 50) * (sin($v1/1000) * 0.5+0.5) * ($v1%5510<1500) * 0.1;
 sin($v1/32+sin($v1/32) * sin($v1/2000+sin($v1/15000)) * sin($v1/200000) * 50) * (sin($v1/2500) * 0.5+0.5) * ($v1%5510<900) * 0.1
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/19.png)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/20.png)
-##Envolventes
+## Envolventes
 if($v1%5510<5, pow($v1%5/5, 2), pow(1-($v1%5510/5510), 3))
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/21.png)
-##Tips
+## Tips
 ($v1 /5510 %8 * 8)
 sin($v1%150)
 sin(8 * $v1%10)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/22.png)
-###Go generative
+## Go generative
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/23.png)
-###Bye :)
+## Bye :)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/24.png)
 
