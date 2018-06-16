@@ -56,7 +56,8 @@ Una cuadrada son ceros y unos, una condición y ya está:
 
 > expr~ ( $v1 %200 > 100) * 0.1
 
-Podemos probar distintos anchos de pulso que no sean simétricos y escuchemos cómo varía el resultado armónico. __Recordá que el ancho del pulso no puede ser mayor que el módulo ( % ).
+Podemos probar distintos anchos de pulso que no sean simétricos y escuchemos cómo varía el resultado armónico. 
+__Recordá que el ancho del pulso no puede ser mayor que el módulo ( % )__.
 
 ## Sinusoide
 
