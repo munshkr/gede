@@ -23,7 +23,7 @@ sin($v1/64)
 ### AM
 (sin($v1/1000) * 0.5+0.5)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/10.png)
-### stereo
+### Stereo
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/11.png)
 ### PWM
 ($v1 %400>$v1 /100 %200 +50)
@@ -54,11 +54,11 @@ sin($v1/32+sin($v1/32) * sin($v1/2000+sin($v1/15000)) * sin($v1/200000) * 50) * 
 if($v1%5510<5, pow($v1%5/5, 2), pow(1-($v1%5510/5510), 3))
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/21.png)
 ## Tips
-($v1 /5510 %8 * 8)
-sin($v1%150)
-sin(8 * $v1%10)
++ ($v1 /5510 %8 * 8)
++ sin($v1%150)
++ sin(8 * $v1%10)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/22.png)
-## Go generative
+## Generatividad
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/23.png)
 ## Bye :)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/24.png)
