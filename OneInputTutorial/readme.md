@@ -1,3 +1,6 @@
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=xEAfMJ9KS9Q" target="_blank"><img src="http://img.youtube.com/vi/xEAfMJ9KS9Q/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
 # Hola!
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/01.png)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/02.png)
