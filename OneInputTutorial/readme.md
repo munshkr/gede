@@ -1,14 +1,15 @@
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=xEAfMJ9KS9Q" target="_blank"><img src="http://img.youtube.com/vi/xEAfMJ9KS9Q/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
-
+# Hola, bienvenido al OneInput Tutorial de livecoding con expr~
+###### Hi, if you don't get spanish you can follow the images, see the vid and download the demo patches (all that is in eng).
+Si todavía no viste el video de demostración que está en YouTube y estás ansiosx por saber qué se puede hacer con lo que voy a explicar acá, chequeá:
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/xEAfMJ9KS9Q/0.jpg)](http://www.youtube.com/watch?v=xEAfMJ9KS9Q)
-
-# Hola!
+Recién me gusta cómo suena a eso de los 10:30 pero vale la pena. Sobre todo para darse una idea del proceso y cómo, en una improvisación, se trabaja para darle forma a lo que va surgiendo. Ahora siguen una serie de imágenes bastante claras de cómo es la cosa. En esta carpeta podés encontrar un archivo __copypaste.txt__ que contiene las principales fórmulas que aparecen acá para que no tengas que tipear o recordar todo a la perfección. Si te interesa le vas a ir agarrando la onda y entendiendo mejor.
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/01.png)
+### phasor~
+Esta rampa va a ser nuestra One(and only)Input para *expr~*. Podés cambiar los valores alterando la __velocidad, tono y duración del loop__. En este caso, el loop dura 100 segundos. Eecordá que __TODO depende de esta función__, de manera que al volver a empezar se resetean todas las modulaciones también y por eso conviene que sea largo y produzca muchas variaciones antes de recomenzar). 
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/02.png)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/03.png)
 ### pop
-($v1%5510<10)
+>($v1%5510<10)
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/04.png)
 ## Formas de onda
 ### saw
