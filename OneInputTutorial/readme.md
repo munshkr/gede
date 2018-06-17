@@ -1,7 +1,10 @@
 # Hola, bienvenido al OneInput Tutorial
 ###### Hi, if you don't get spanish you can follow the images, see the vid and download the demo patches (all that is in eng).
+
 Si todavía no viste el video de demostración que está en YouTube y estás ansiosx por saber qué y cómo se puede hacer:
+
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/xEAfMJ9KS9Q/0.jpg)](http://www.youtube.com/watch?v=xEAfMJ9KS9Q)
+
 Me gusta cómo suena a eso de los 10:30 pero vale la pena mirarlo para darse una idea del proceso y de cómo, en una improvisación, se trabaja para darle forma a lo que va surgiendo. Ahora siguen una serie de imágenes bastante claras de cómo es la cosa. 
 
 ## AL TRABAJAR CON EXPRESIONES MATEMÁTICAS Y LÓGICAS, PRÁCTICAMENTE TODO ES APLICABLE A TODO, así es que no tomes este tutorial como si fuera lo único que puede hacerse sino como una base a partir de la cual podés empezar a experimentar por tu cuenta.
