@@ -52,9 +52,9 @@ cuando la amplitud máxima debería ser, como mucho, 1.
 
 >($v1%400<200)
 
-Esta forma es menos "riesgosa" en términos de amplitud. Con una simple condición ya logramos una onda cuadrada (en este caso, si es menor que 200 va a darnos un 0 y sino un 1, como el módulo es de 400 tenemos un pulso simétrico), podés probar distintos anchos de pulso (la proporción entre su parte 0 y su parte 1) para lograr timbres distintos. Más adelante vamos a ver cómo modular eso. El ejemplo daría algo como:
+Esta forma es menos "riesgosa" en términos de amplitud. Con una simple condición ya logramos una onda cuadrada (en este caso, si es menor que 200 va a darnos un 2 y sino un 0, como el módulo es de 400 tenemos un pulso simétrico), podés probar distintos anchos de pulso (la proporción entre su parte 0 y su parte 1) para lograr timbres distintos. Más adelante vamos a ver cómo modular eso. El ejemplo daría algo como:
 
-001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011
+11001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011001100110011
 
 ![](https://raw.githubusercontent.com/gabochi/gede/master/OneInputTutorial/06.png)
 
