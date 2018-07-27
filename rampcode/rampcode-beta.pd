@@ -1,0 +1,3 @@
+#N canvas 600 450 667 301 10;
+#X obj 1 8 ramp;
+#X obj 0 33 mixer;
